@@ -1,1 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국해양학위원회 (KOSCOR)</title>
+    <style>
+        /* 기본 스타일 리셋 및 폰트 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth; /* Smooth scroll */
+        }
+        body {
+            font-family: 'Segoe UI', AppleSDGothicNeo-Regular, '맑은 고딕', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
 
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+        .logo-container img {
+            height: 45px;
+            width: auto;
+            display: block;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #0056b3;
+        }
+
+        /* 공통 섹션 스타일 */
+        section {
+            padding: 100px 10% 80px 10%;
+            min-height: 50vh;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #0d233a;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #0056b3;
+            margin: 10px auto 0 auto;
+        }
+
+        /* I. KOSCOR Section */
+        #koscor {
+            margin-top: 70px;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('main.jpg') no-repeat center center/cover;
+            text-align: center;
+            padding-top: 120px;
+            padding-bottom: 120px;
+        }
+        .hero-text h1 {
+            font-size: 2.5rem;
+            color: #003366;
+            margin-bottom: 1rem;
+        }
+        .hero-text p {
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #555;
+            word-break: keep-all;
+        }
+
+        /* II. Members Section */
+        #members {
+            background-color: #ffffff;
+        }
+        .term-badge {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0056b3;
+            margin-bottom: 2rem;
+        }
+        .table-container {
+            overflow-x: auto;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .members-table th, .members-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .members-table th {
+            background-color: #0f4c81;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .members-table tr:hover {
+            background-color: #f1f5f9;
+        }
+        .role-highlight {
+            font-weight: bold;
+            color: #0f4c81;
+        }
+
+        /* III. Activities Section */
+        #activities {
+            background-color: #f8f9fa;
+        }
+        .activity-placeholder {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 5px solid #0056b3;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* IV. Gallery Section */
+        #gallery {
+            background-color: #ffffff;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .gallery-item {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item .caption {
+            padding: 15px;
+            text-align: center;
+            font-weight: 500;
+            color: #444;
+        }
+
+        /* V. Contact Section & Footer */
+        #contact {
+            background-color: #1a252f;
+            color: #ffffff;
+            text-align: center;
+        }
+        #contact .section-title {
+            color: #ffffff;
+        }
+        .contact-info {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        .contact-info a {
+            color: #64b5f6;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #111822;
+            color: #888;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* 반응형 모바일 처리 */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+            nav ul {
+                margin-top: 10px;
+            }
+            nav ul li {
+                margin: 0 10px;
+            }
+            #koscor {
+                margin-top: 100px;
+            }
+            section {
+                padding: 80px 5% 40px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="#koscor">
+                <img src="main.jpg" alt="KOSCOR Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#koscor">KOSCOR</a></li>
+                <li><a href="#members">Members</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="koscor">
+        <div class="hero-text">
+            <h1>한국해양학위원회 (KOSCOR)</h1>
+            <p>
+                한국해양학위원회(KOSCOR, Korea Scientific Committee on Oceanic Research)는 국제학술협의회(ISC) 산하 해양연구학술위원회(SCOR)의 한국 대표 위원회입니다. 국내 해양학계의 국제 교류를 촉진하고 글로벌 해양 과학 연구를 선도하기 위해 활동하고 있습니다.
+            </p>
+        </div>
+    </section>
+
+    <section id="members">
+        <h2 class="section-title">Members</h2>
+        <p class="term-badge">SCOR Subcommittee members (2026.04.01 - 2028.03.31)</p>
+        
+        <div class="table-container">
+            <table class="members-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>성명</th>
+                        <th>소속</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="role-highlight">위원장</td>
+                        <td>장찬주</td>
+                        <td>한국해양과학기술원</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>강동진</td>
+                        <td>한국해양과학기술원</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>권은영</td>
+                        <td>부산대학교</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>김인태</td>
+                        <td>한국해양과학기술원</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>노태근</td>
+                        <td>한국해양과학기술원</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>박재형</td>
+                        <td>한국해양과학기술원</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>박태욱</td>
+                        <td>극지연구소</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>신형철</td>
+                        <td>극지연구소</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>유신재</td>
+                        <td>국제해양학위원회</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>윤승태</td>
+                        <td>경북대학교</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>최근형</td>
+                        <td>충남대학교</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>현정호</td>
+                        <td>한양대학교</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">위원</td>
+                        <td>황점식</td>
+                        <td>서울대학교</td>
+                    </tr>
+                    <tr>
+                        <td class="role-highlight">간사</td>
+                        <td>문중호</td>
+                        <td>한국해양과학기술원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="activities">
+        <h2 class="section-title">Activities</h2>
+        <div class="activity-placeholder">
+            <h3>주요 활동 및 연구 안내</h3>
+            <br>
+            <p>• SCOR 국제 워킹그룹(Working Groups) 참여 및 국내 연구진 활동 지원</p>
+            <p>• 연례 KOSCOR 정기 총회 및 학술 심포지엄 개최</p>
+            <p>• 국제 해양학 학술 교류 및 네트워크 구축 활동</p>
+            <p style="margin-top: 10px; color: #777; font-size: 0.9rem;">(※ 세부 활동 내역은 추후 업데이트될 예정입니다.)</p>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="사진1.jpg" alt="koscor 회의">
+                <div class="caption">koscor 회의</div>
+            </div>
+            <div class="gallery-item">
+                <img src="사진2.jpg" alt="koscor 회의">
+                <div class="caption">koscor 회의</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <p>KOSCOR 문의사항은 아래 이메일로 연락주시기 바랍니다.</p>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:info@koscor.or.kr">info@koscor.or.kr</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 KOSCOR (Korea Scientific Committee on Oceanic Research). All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
