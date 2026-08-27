@@ -107,10 +107,11 @@
         .hero-banner {
             background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('images/ocean.jpg') no-repeat center center/cover;
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             background-color: #ffffff;
+            margin-bottom: 40px;
         }
         .hero-text h1 {
             font-size: 2.3rem;
@@ -124,6 +125,59 @@
             color: #444;
             word-break: keep-all;
             line-height: 1.8;
+        }
+
+        /* SCOR 메인 소개 카드 (추가) */
+        .scor-banner {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 4px solid #0056b3;
+        }
+        .scor-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .scor-logo {
+            max-width: 220px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .scor-header h2 {
+            font-size: 1.8rem;
+            color: #003366;
+        }
+        .scor-body p {
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        .scor-btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .btn-find-out-more {
+            display: inline-block;
+            background-color: #0056b3;
+            color: #ffffff;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,86,179,0.25);
+        }
+        .btn-find-out-more:hover {
+            background-color: #003366;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,51,102,0.3);
         }
 
         /* II. Members Section */
@@ -166,23 +220,83 @@
             color: #0f4c81;
         }
 
-        /* III. Activities Section */
-        .activity-placeholder {
-            max-width: 800px;
+        /* III. Activities Section 및 세부 배너(서브 탭) 스타일 */
+        .activity-subnav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            background: #e9ecef;
+            padding: 6px;
+            border-radius: 8px;
+        }
+        .subnav-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .subnav-btn:hover {
+            color: #0056b3;
+            background-color: rgba(255,255,255,0.5);
+        }
+        .subnav-btn.active {
+            background-color: #0056b3;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .activity-subcontent {
+            display: none;
+            max-width: 900px;
             margin: 0 auto;
             background: #ffffff;
             padding: 2.5rem;
             border-radius: 10px;
-            border-left: 5px solid #0056b3;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid #0056b3;
+            animation: fadeIn 0.3s ease-in-out;
         }
-        .activity-placeholder h3 {
+        .activity-subcontent.active {
+            display: block;
+        }
+        .activity-subcontent h3 {
             color: #0d233a;
-            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
         }
-        .activity-placeholder p {
-            margin-bottom: 8px;
+        .activity-list {
+            list-style-type: none;
+        }
+        .activity-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
             font-size: 1.05rem;
+            color: #444;
+        }
+        .activity-list li::before {
+            content: "•";
+            color: #0056b3;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        .item-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-left: 8px;
         }
 
         /* IV. Gallery Section */
@@ -268,6 +382,9 @@
                 margin-top: 120px;
                 padding: 20px 5% 40px 5%;
             }
+            .activity-subnav {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -294,12 +411,30 @@
 
         <!-- I. KOSCOR Tab (Home Page) -->
         <div id="koscor" class="tab-content active">
+            <!-- KOSCOR 히어로 배너 -->
             <div class="hero-banner">
                 <div class="hero-text">
                     <h1>한국해양학위원회 (KOSCOR)</h1>
                     <p>
                         한국해양학위원회(KOSCOR, Korean Scientific Committee on Oceanic Research)는 국제학술협의회(ISC) 산하 해양연구학술위원회(SCOR)의 한국 대표 위원회입니다. 국내 해양학계의 국제 교류를 촉진하고 글로벌 해양 과학 연구를 선도하기 위해 활동하고 있습니다.
                     </p>
+                </div>
+            </div>
+
+            <!-- SCOR 메인 소개 섹션 (수정 추가) -->
+            <div class="scor-banner">
+                <div class="scor-header">
+                    <img src="images/scor_logo.png" alt="SCOR Logo" class="scor-logo">
+                    <h2>About SCOR</h2>
+                </div>
+                <div class="scor-body">
+                    <p>SCOR is an international non-governmental non-profit organization. The SCOR Secretariat is hosted at the University of Delaware (USA) and SCOR is incorporated in the State of Maryland as a 501(c)(3) organization.</p>
+                    <p>SCOR activities focus on promoting international cooperation in planning and conducting oceanographic research, and solving methodological and conceptual problems that hinder research. SCOR covers all areas of ocean science and cooperates with other organizations with common interests to conduct many SCOR activities.</p>
+                    <p>SCOR also conducts several different activities to build the capacity for ocean science in developing countries and every SCOR activity includes members from developing countries.</p>
+                    <p>Scientists from thirty-two nations have formed national SCOR committees as a foundation for international SCOR. Over 600 scientists from approximately 60 countries participate in SCOR activities every year.</p>
+                </div>
+                <div class="scor-btn-container">
+                    <a href="https://scor-int.org/" target="_blank" rel="noopener noreferrer" class="btn-find-out-more">FIND OUT MORE</a>
                 </div>
             </div>
         </div>
@@ -394,15 +529,48 @@
             </div>
         </div>
 
-        <!-- III. Activities Tab -->
+        <!-- III. Activities Tab (수정 반영: 서브 배너/탭 구조 추가) -->
         <div id="activities" class="tab-content">
             <h2 class="section-title">Activities</h2>
-            <div class="activity-placeholder">
-                <h3>주요 활동 및 연구 안내</h3>
-                <p>• SCOR 국제 워킹그룹(Working Groups) 참여 및 국내 연구진 활동 지원</p>
-                <p>• 연례 KOSCOR 정기 총회 및 학술 심포지엄 개최</p>
-                <p>• 국제 해양학 학술 교류 및 네트워크 구축 활동</p>
-                <p style="margin-top: 15px; color: #777; font-size: 0.9rem;">(※ 세부 활동 내역은 추후 업데이트될 예정입니다.)</p>
+            
+            <!-- 세부 배너 (서브 네비게이션) -->
+            <div class="activity-subnav">
+                <button class="subnav-btn active" onclick="openActivitySubTab(event, 'act-programs')">Programs</button>
+                <button class="subnav-btn" onclick="openActivitySubTab(event, 'act-reports')">Reports</button>
+                <button class="subnav-btn" onclick="openActivitySubTab(event, 'act-newsletters')">Newsletters</button>
+            </div>
+
+            <!-- 1. Programs 세부 내용 -->
+            <div id="act-programs" class="activity-subcontent active">
+                <h3>International Research Programs & Working Groups</h3>
+                <ul class="activity-list">
+                    <li>SCOR International Working Groups 참여 및 글로벌 협력 연구 추진</li>
+                    <li>국제 해양 과학 대형 연구 프로젝트(GEOTRACES, SOLAS, IMBeR 등) 국내 연계</li>
+                    <li>신진 해양과학자 역량 강화를 위한 워크숍 및 학술 세미나 개최</li>
+                    <li>국제 해양학 심포지엄 참가를 통한 국내 연구진의 글로벌 네트워크 지원</li>
+                </ul>
+            </div>
+
+            <!-- 2. Reports 세부 내용 -->
+            <div id="act-reports" class="activity-subcontent">
+                <h3>Annual Reports & Committee Proceedings</h3>
+                <ul class="activity-list">
+                    <li>KOSCOR 연례 활동 및 SCOR 연차 보고서 <span class="item-date">(2025 - 2026)</span></li>
+                    <li>국제 해양 과학 워킹그룹(WG) 국내 활동 성과 보고서 <span class="item-date">(2025)</span></li>
+                    <li>KOSCOR 정기 총회 및 학술 위원회 회의록 <span class="item-date">(2025.11)</span></li>
+                    <li>글로벌 해양학 동향 및 정책 분석 보고서 <span class="item-date">(2024)</span></li>
+                </ul>
+            </div>
+
+            <!-- 3. Newsletters 세부 내용 -->
+            <div id="act-newsletters" class="activity-subcontent">
+                <h3>KOSCOR & SCOR Newsletters</h3>
+                <ul class="activity-list">
+                    <li>KOSCOR 소식지 제24호 - SCOR 연례 회의 결과 및 한국 대표단 성과 <span class="item-date">(2026.02)</span></li>
+                    <li>KOSCOR 소식지 제23호 - 해양 기후변화 국제 공동연구 특별호 <span class="item-date">(2025.09)</span></li>
+                    <li>SCOR International Electronic Newsletter (Latest Edition) <span class="item-date">(2025.12)</span></li>
+                    <li>KOSCOR 소식지 제22호 - 신진 해양과학자 워크숍 개최 소식 <span class="item-date">(2025.05)</span></li>
+                </ul>
             </div>
         </div>
 
@@ -439,8 +607,9 @@
         <p>&copy; 2026 KOSCOR (Korean Scientific Committee on Oceanic Research). All Rights Reserved.</p>
     </footer>
 
-    <!-- Tab Switching Script -->
+    <!-- Scripts -->
     <script>
+        // 메인 탭 전환 함수
         function openTab(evt, tabName) {
             // 1. 모든 tab-content 숨기기
             const tabContents = document.getElementsByClassName("tab-content");
@@ -466,6 +635,25 @@
 
             // 탭 전환 시 화면 상단으로 스크롤 조정
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Activities 서브 탭(배너) 전환 함수 (수정 추가)
+        function openActivitySubTab(evt, subTabName) {
+            // 1. 모든 activity-subcontent 숨기기
+            const subContents = document.getElementsByClassName("activity-subcontent");
+            for (let i = 0; i < subContents.length; i++) {
+                subContents[i].classList.remove("active");
+            }
+
+            // 2. 모든 subnav-btn의 active 클래스 제거
+            const subBtns = document.getElementsByClassName("subnav-btn");
+            for (let i = 0; i < subBtns.length; i++) {
+                subBtns[i].classList.remove("active");
+            }
+
+            // 3. 선택된 서브 탭 콘텐츠 및 버튼 활성화
+            document.getElementById(subTabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
     </script>
 
